@@ -5,10 +5,7 @@ pipeline {
     tools {
         maven 'maven-3.9.11'
     }
-    environment {
-        DOCKER_REPO_SERVER = 'vikramrajni'
-        DOCKER_REPO = "${DOCKER_REPO_SERVER}/java-maven-app"
-    }
+
     stages {
         stage('increment version') {
             steps {
@@ -37,8 +34,8 @@ pipeline {
                     echo "building the docker image..."
                     withCredentials([usernamePassword(credentialsId: 'DockerHub', passwordVariable: 'PASS', usernameVariable: 'USER')]){
                         sh "docker build -t ${DOCKER_REPO}:${IMAGE_NAME} ."
-                        sh 'echo $PASS | docker login -u $USER --password-stdin ${DOCKER_REPO_SERVER}'
-                        sh "docker push ${DOCKER_REPO}:${IMAGE_NAME}"
+                        sh 'echo $PASS | docker login -u $USER --password-stdin'
+                        sh "docker push vikramrajni/demo-app:${IMAGE_NAME}"
                     }
                 }
             }
