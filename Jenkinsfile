@@ -63,7 +63,11 @@ pipeline {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+<<<<<<< HEAD
                         sh "git remote set-url origin https://${USER}:${PASS}@github.com/vikramrajni/EKS-and-AWS-ECR.git"
+=======
+                        sh "git remote set-url origin https://$USER}:${PASS}@github.com/vikramrajni/EKS-and-AWS-ECR.git"
+>>>>>>> 03cfa80f5980abd47b4d910bbe648a2b0ab44255
                         sh 'git add .'
                         sh 'git commit -m "ci: version bump"'
                         sh 'git push origin HEAD:jenkins-jobs'
